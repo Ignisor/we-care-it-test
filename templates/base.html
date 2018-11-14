@@ -8,6 +8,19 @@
     {% endblock %}
 </head>
 <body>
+{% block header %}
+    <ul>
+        <li><a href="{% url 'journey_create' %}">Create journey</a></li>
+        <li><a href="{% url 'vehicles_list' %}">Vehicles statistics</a></li>
+        <li><a href="{% url 'users_statistics_list' %}">Users statistics</a></li>
+
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Log in</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
 {% block content %}
 
 {% endblock %}
