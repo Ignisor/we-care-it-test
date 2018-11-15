@@ -1,0 +1,21 @@
+version: '3'
+services:
+  static:
+    image: busybox
+    volumes:
+        - ./static:/app/static
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=0
+    command: gunicorn we_care_it.wsgi --workers 4 -b 0.0.0.0:8000 --reload
+    entrypoint: ./docker-entrypoint.sh
+
+volumes:
+  static:
+    external: true
